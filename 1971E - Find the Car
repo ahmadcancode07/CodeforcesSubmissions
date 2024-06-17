@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+#define int long long
+using namespace std;
+
+void solve() {
+	int n, k, q; cin >> n >> k >> q;
+	vector <int> p (k + 1); vector <int> t (k + 1);
+	t[0] = 0; p[0] = 0;
+	for (int i = 1; i <= k; i++) cin >> p[i];
+	for (int i = 1; i <= k; i++) cin >> t[i];
+
+	while (q--) {
+		int d; cin >> d;
+		int ind = lower_bound(p.begin(), p.end(), d) - p.begin();
+		if (p[ind] == d) {
+			cout << t[ind] << ' ';
+			continue;
+		}
+		ind--;
+		int distance = d - p[ind];
+		int speed = (p[ind + 1] - p[ind]) / (t[ind + 1] - t[ind]);
+		cout << t[ind] + (d - p[ind]) * (t[ind + 1] - t[ind]) / (p[ind + 1] - p[ind])<< ' ';
+	}
+	cout << endl;
+}
+
+signed main() {
+	int testcase; cin >> testcase;
+	for (int i = 1; i <= testcase; i++) {
+		// cout << "TESTCASE #" << testcase << " :";
+		solve();
+	}
+}
